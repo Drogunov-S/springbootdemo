@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Person</title>
+</head>
+<body>
+<h1>Show person</h1>
+<!--/*@thymesVar id="person" type="ru.drogunov.springcource.model.Person"*/-->
+<hr>
+<p th:text="'ID: '+${person.getId()}"/>
+<hr>
+<p th:text="'Name: '+${person.getName()}"/>
+<hr>
+<p th:text="'Suename '+${person.getSurname()}"></p>
+<hr>
+<p th:text="'Year brith '+${person.getYearBrith()}"></p>
+<hr>
+<p th:text="'Email '+${person.getEmail()}"></p>
+<hr>
+<p th:text="'Address'+${person.getAddress()}"></p>
+<hr>
+<p th:text="'Role '+${person.getRole()}"></p>
+<hr>
+<br>
+<p th:text="${person.getBooks().size() > 0} ? 'Книги: ' : 'Нет взятых книг'"></p>
+<br>
+<!--/*@thymesVar id="book" type="ru.drogunov.springcource.model.Book"*/-->
+<ul>
+  <li th:each="book:${person.getBooks()}">
+    <a th:href="@{/books/{id}(id=${book.id})}" th:text="${book.title} + ' ' + ${book.author}"/>
+  </li>
+</ul>
+<br>
+<hr>
+<a th:href="@{/people/{id}/edit(id=${person.getId()})}">Update person</a>
+<br>
+<hr>
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+  <input type="submit" value="Delete">
+</form>
+
+<nav>
+  <br>
+  <a href="/">Home page</a>
+  <br>
+  <hr>
+  <a href="/people">Persons</a>
+  <br>
+  <hr>
+  <a href="/people/new">Create person</a>
+  <br>
+  <hr>
+  <a href="/books">Books</a>
+  <br>
+  <hr>
+  <a href="/books/new">Create books</a>
+  <br>
+  <hr>
+  <a href="/admin">Added admin</a>
+  <hr>
+  <br>
+</nav>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

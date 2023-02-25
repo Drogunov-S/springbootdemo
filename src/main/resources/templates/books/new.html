@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create book</title>
+</head>
+<body>
+<h1>Create book</h1>
+<!--/*@thymesVar id="book" type="ru.drogunov.springcource.model.Book"*/-->
+<form th:method="POST" th:action="@{/books/new}" th:object="${book}">
+  <label for="title">Enter title: </label>
+  <input type="text" th:field="*{title}" id="title"/>
+  <hr>
+  <span style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+  <hr>
+  <br>
+  <label for="author">Enter author: </label>
+  <input type="text" th:field="*{author}" id="author"/>
+  <hr>
+  <span style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
+  <hr>
+  <br>
+  <label for="yearManufactured">Enter year manufactured: </label>
+  <input type="text" th:field="*{yearManufactured}" id="yearManufactured"/>
+  <hr>
+  <span style="color:red" th:if="${#fields.hasErrors('yearManufactured')}" th:errors="*{yearManufactured}"></span>
+  <input type="submit" value="Create"/>
+</form>
+<nav>
+  <br>
+  <a href="/">Home page</a>
+  <br>
+  <hr>
+  <a href="/people">Persons</a>
+  <br>
+  <hr>
+  <a href="/people/new">Create person</a>
+  <br>
+  <hr>
+  <a href="/books">Books</a>
+  <br>
+  <hr>
+  <a href="/books/new">Create books</a>
+  <br>
+  <hr>
+  <a href="/admin">Added admin</a>
+  <hr>
+  <br>
+</nav>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>All books</title>
+</head>
+<body>
+
+<select th:object="${Integer}" id="pageSize" name="pageSize">
+  <option value="3">3</option>
+  <option value="5">5</option>
+  <option value="10">10</option>
+  <option value="50">50</option>
+</select>
+
+<div>
+  <ul>
+    <!--/*@thymesVar id="page" type="org.springframework.data.domain.Page"*/-->
+    <li th:each="book : ${page.content}" th:object="${book}">
+      <!--/*@thymesVar id="book" type="ru.drogunov.springcource.model.Book"*/-->
+      <a th:href="@{/books/{id}(id=${book.getId()})}"
+         th:object="${book}"
+         th:text="*{title} + ',         ' + *{author} + ',         ' + *{yearManufactured}"/>
+    </li>
+  </ul>
+  <br>
+  <br>
+  <!--/*@thymesVar id="page" type="org.springframework.data.domain.Page"*/-->
+  <div>
+    <a th:each="pageNumber : ${#numbers.sequence(0, page.getTotalPages())}"
+       th:href="@{/books?page={pageNumber}&pageSize={pageSizing}(pageNumber=${pageNumber}, pageSizing=${10})}"
+       th:text="${pageNumber}"></a>
+  </div>
+  <br>
+</div>
+
+<nav>
+  <br>
+  <a href="/">Home page</a>
+  <br>
+  <hr>
+  <a href="/people">Persons</a>
+  <br>
+  <hr>
+  <a href="/people/new">Create person</a>
+  <br>
+  <hr>
+  <a href="/books">Books</a>
+  <br>
+  <hr>
+  <a href="/books/new">Create books</a>
+  <br>
+  <hr>
+  <a href="/admin">Added admin</a>
+  <hr>
+  <br>
+</nav>
+</body>
+</html>

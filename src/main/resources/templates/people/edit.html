@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit person</title>
+</head>
+<body>
+<h1>Edit person</h1>
+<!--/*@thymesVar id="person" type="ru.drogunov.springcource.model.Person"*/-->
+<form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
+  <label for="name">Enter name: </label>
+  <input type="text" th:field="*{name}" id="name"/>
+  <hr>
+  <span style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+  <hr>
+  <br>
+  <label for="surname">Enter surname: </label>
+  <input type="text" th:field="*{surname}" id="surname"/>
+  <hr>
+  <span style="color:red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
+  <hr>
+  <br>
+  <label for="age">Enter age: </label>
+  <input type="text" th:field="*{yearBrith}" id="age"/>
+  <hr>
+  <span style="color:red" th:if="${#fields.hasErrors('yearBrith')}" th:errors="*{yearBrith}"></span>
+  <hr>
+  <br>
+  <label for="email">Enter email: </label>
+  <input type="text" th:field="*{email}" id="email"/>
+  <hr>
+  <span style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+  <hr>
+  <br>
+  <label for="address">Enter address: </label>
+  <input type="text" th:field="*{address}" id="address"/>
+  <hr>
+  <span style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+  <hr>
+  <input type="submit" value="Update"/>
+</form>
+<nav>
+  <br>
+  <a href="/">Home page</a>
+  <br>
+  <hr>
+  <a href="/people">Persons</a>
+  <br>
+  <hr>
+  <a href="/people/new">Create person</a>
+  <br>
+  <hr>
+  <a href="/books">Books</a>
+  <br>
+  <hr>
+  <a href="/books/new">Create books</a>
+  <br>
+  <hr>
+  <a href="/admin">Added admin</a>
+  <hr>
+  <br>
+</nav>
+
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/books/search}">
+  <label for="query">Введите поисковой запрос: </label>
+  <input type="text" id="query" name="query"/>
+  <br>
+  <input type="submit" value="Search"/>
+</form>
+
+<!--/*@thymesVar id="books" type="java.util.ArrayList"*/-->
+<div th:if="${books}">
+  <div th:if="${books.isEmpty()}">
+    <span>Книг не найдено</span>
+  </div>
+  <!--/*@thymesVar id="book" type="ru.drogunov.springcource.model.Book"*/-->
+  <ul th:each="book : ${books}">
+    <li>
+      <a th:href="@{/books/{id}(id=${book.id})}" th:text="${book.title + ' ' + book.author + ' ' + book.yearManufactured}"/>
+    <div>
+      <span th:if="${book.isFree()}">Книга свободна</span>
+      <span th:if="${!book.isFree()}">
+        Книга у:
+        <a th:href="@{/people/{id}(id=${book.person.id})}" th:text="${book.person.name}"/>
+      </span>
+    </div>
+    <hr>
+    </li>
+  </ul>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
