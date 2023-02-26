@@ -3,6 +3,7 @@ package ru.drogunov.springbootdemo.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.drogunov.springbootdemo.model.Book;
@@ -22,19 +23,13 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
     
-/*    public Page<Book> findPaginated(Pageable pageable) {
-        int pageSize = pageable.getPageSize();
-        int currentPage = pageable.getPageNumber();
-        int startItem = currentPage * pageSize;
-        List<Book> list;
-        
-        if (list.size() < startItem) {
-            list = Collections.emptyList();
+    public Page<Book> findAll(PageRequest pageRequest, Boolean sortByYear) {
+        Page<Book> all;
+        if (sortByYear) {
+            all = bookRepository.findAll(pageRequest.withSort(Sort.by("year")));
+        } else {
+            all = bookRepository.findAll(pageRequest);
         }
-    }*/
-    
-    public Page<Book> findAll(PageRequest pageRequest) {
-        Page<Book> all = bookRepository.findAll(pageRequest);
         return all;
     }
     
@@ -57,6 +52,7 @@ public class BookService {
         bookRepository.save(book);
     }
     
+    @Transactional
     public void delete(Integer id) {
         bookRepository.deleteById(id);
     }

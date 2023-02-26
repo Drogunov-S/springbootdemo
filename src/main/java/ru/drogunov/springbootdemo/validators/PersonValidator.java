@@ -28,11 +28,26 @@ public class PersonValidator implements Validator {
     public void validate(Object target, Errors errors) {
         Person person = (Person) target;
         Optional<Person> personFromDb = peopleService.findByEmail(person.getEmail());
-        if (personFromDb.isPresent()
-                && !Objects.equals(person.getId(), personFromDb.get().getId())
-        ) {
+        if (checkByEmail(person)) {
             errors.rejectValue("email", "", "This email is already taken");
+        } else if (checkByLogin(person)) {
+            errors.rejectValue("username", "", "This login is busy");
         }
+    }
+    
+    private boolean checkByEmail(Person target) {
+        Optional<Person> personFromDb = peopleService.findByEmail(target.getEmail());
+        return predicateByIsPresentAndById(personFromDb, target);
+    }
+    
+    private boolean checkByLogin(Person target) {
+        Optional<Person> personFromDb = peopleService.findByLogin(target.getLogin());
+        return predicateByIsPresentAndById(personFromDb, target);
+    }
+    
+    private boolean predicateByIsPresentAndById(Optional<Person> personFromDb, Person target) {
+        return personFromDb.isPresent()
+                && !Objects.equals(target.getId(), personFromDb.get().getId());
     }
 }
 

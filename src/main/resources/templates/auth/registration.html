@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="../css/sign-in.css" type="text/css" rel="stylesheet">
+</head>
+<body class="text-center">
+
+<main class="form-signin w-100 m-auto">
+  <form th:method="POST" th:action="@{/auth/registration}" id="regForm" th:object="${person}">
+    <img class="mb-4" src="../images/logo/bootstrap-logo.svg" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Please registration</h1>
+
+    <div class="form-floating">
+      <input th:field="*{login}" type="text" class="form-control" id="username" name="username" placeholder="Login">
+      <label for="username">
+        <span class="error" style="color: red" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
+      </label>
+
+    </div>
+    <div class="form-floating">
+      <input th:field="*{password}" type="password" class="form-control" id="password" placeholder="password">
+      <label for="password">Password</label>
+      <span class="error" style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+    </div>
+    <div class="form-floating">
+      <input th:field="*{name}" type="text" class="form-control" id="name" name="name" placeholder="name">
+      <label for="name">Name</label>
+      <span class="error" style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    </div>
+    <div class="form-floating">
+      <input th:field="*{yearOfBrith}" type="number" class="form-control" id="yearOfBrith" name="yearOfBrith"
+             placeholder="">
+      <label for="yearOfBrith">Year of birthday</label>
+      <span class="error" style="color: red" th:if="${#fields.hasErrors('yearOfBrith')}" th:errors="*{yearOfBrith}"></span>
+    </div>
+    <div class="form-floating">
+      <input th:field="*{email}" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Email address</label>
+      <span class="error" style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+    </div>
+    <div class="form-floating">
+      <textarea th:field="*{address}" form="regForm" class="form-control" id="address" placeholder=""></textarea>
+      <label for="address">Address</label>
+      <span class="error" style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Registration</button>
+    <a th:href="@{/auth/login}">
+      <button class="w-100 btn btn-outline-primary me-2" type="button">Login</button>
+    </a>
+    <p class="mt-5 mb-3 text-muted">© 2023</p>
+
+  </form>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+        crossorigin="anonymous"></script>
+</body>
+</html>

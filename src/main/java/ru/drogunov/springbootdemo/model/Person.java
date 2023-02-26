@@ -11,15 +11,16 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "login")
+    private String login;
+    @Column(name = "password")
+    private String password;
     @NotEmpty(message = "Name not by null")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     private String name;
-    @NotEmpty(message = "Name not by null")
-    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
-    private String surname;
     @Column(name = "year_birth")
     @Min(value = 1850, message = "Min year age 1850 ")
-    private Integer yearBrith;
+    private Integer yearOfBrith;
     @Email
     private String email;
     @Pattern(
@@ -29,7 +30,6 @@ public class Person {
     private String address;
     @Enumerated(EnumType.STRING)
     Role role;
-
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "person_id")
     private List<Book> books;
@@ -37,19 +37,30 @@ public class Person {
     public Person() {
     }
     
-    public Person(Integer id, String name, String surname, Integer yearBrith, String email, String address, Role role, List<Book> books) {
+    public Person(Integer id, String name, Integer yearBrith, String email, String address, Role role, List<Book> books) {
         this.id = id;
         this.name = name;
-        this.surname = surname;
-        this.yearBrith = yearBrith;
+        this.yearOfBrith = yearBrith;
         this.email = email;
         this.address = address;
         this.role = role;
         this.books = books;
     }
     
-    public String getFullname() {
-        return String.format("%s %s", name, surname);
+    public String getLogin() {
+        return login;
+    }
+    
+    public void setLogin(String login) {
+        this.login = login;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
     }
     
     public Role getRole() {
@@ -68,12 +79,12 @@ public class Person {
         this.address = address;
     }
     
-    public Integer getYearBrith() {
-        return yearBrith;
+    public Integer getYearOfBrith() {
+        return yearOfBrith;
     }
     
-    public void setYearBrith(Integer yearBrith) {
-        this.yearBrith = yearBrith;
+    public void setYearOfBrith(Integer yearOfBrith) {
+        this.yearOfBrith = yearOfBrith;
     }
     
     public String getEmail() {
@@ -82,14 +93,6 @@ public class Person {
     
     public void setEmail(String email) {
         this.email = email;
-    }
-    
-    public String getSurname() {
-        return surname;
-    }
-    
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
     
     public Integer getId() {

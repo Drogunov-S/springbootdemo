@@ -32,7 +32,7 @@
   <div>
     <a th:each="pageNumber : ${#numbers.sequence(0, page.getTotalPages())}"
        th:href="@{/books?page={pageNumber}&pageSize={pageSizing}(pageNumber=${pageNumber}, pageSizing=${10})}"
-       th:text="${pageNumber}"></a>
+       th:text="'|' + ${pageNumber}"></a>
   </div>
   <br>
 </div>

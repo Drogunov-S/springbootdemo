@@ -15,7 +15,6 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
     @ManyToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
@@ -26,12 +25,11 @@ public class Book {
     @Column(name = "year", columnDefinition = "integer")
     @DateTimeFormat(pattern = "YYYY")
     private Year yearManufactured;
-    
     @Column(name = "taken_at")
     private Date takenAt;
-    
     @Transient
     private Boolean expired;
+    
     public Book() {
     }
     

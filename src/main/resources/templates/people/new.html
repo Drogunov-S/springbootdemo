@@ -14,16 +14,10 @@
   <span style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
   <hr>
   <br>
-  <label for="surname">Enter surname: </label>
-  <input type="text" th:field="*{surname}" id="surname"/>
+  <label for="yearOfBrith">Enter year: </label>
+  <input type="text" th:field="*{yearOfBrith}" id="yearOfBrith"/>
   <hr>
-  <span style="color:red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
-  <hr>
-  <br>
-  <label for="yearBrith">Enter year: </label>
-  <input type="text" th:field="*{yearBrith}" id="yearBrith"/>
-  <hr>
-  <span style="color:red" th:if="${#fields.hasErrors('yearBrith')}" th:errors="*{yearBrith}"></span>
+  <span style="color:red" th:if="${#fields.hasErrors('yearOfBrith')}" th:errors="*{yearOfBrith}"></span>
   <hr>
   <br>
   <label for="email">Enter email: </label>

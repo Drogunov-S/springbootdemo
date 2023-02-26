@@ -55,7 +55,7 @@ public class PeopleController {
             return "people/new";
         }
         peopleService.save(person);
-        return "redirect: /people";
+        return "redirect:/people";
     }
     
     @GetMapping("/{id}/edit")
@@ -68,19 +68,18 @@ public class PeopleController {
     
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("person") @Valid Person person,
-                         BindingResult bindingResult,
-                         @PathVariable("id") Integer id) {
+                         BindingResult bindingResult) {
         personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors()) {
             return "people/edit";
         }
         peopleService.update(person);
-        return "redirect: /people";
+        return "redirect:"+ person.getId();
     }
     
     @DeleteMapping("/{id}")
     private String delete(@PathVariable("id") Integer id) {
         peopleService.delete(id);
-        return "redirect: /people";
+        return "redirect:/people";
     }
 }

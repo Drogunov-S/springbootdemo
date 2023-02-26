@@ -11,14 +11,12 @@
   <!--/*@thymesVar id="person" type="ru.drogunov.springcource.model.Person"*/-->
   <select th:object="${person}" th:field="*{id}" id="person">
     <option th:each="person : ${people}" th:value="${person.getId()}"
-            th:text="${person.getFullname()} + ' ' + ${person.getRole()}"></option>
+            th:text="${person.getName()} + ' ' + ${person.getRole()}"></option>
   </select>
   <br>
   <label for="role">Выберете роль: </label>
-  <!--/*@thymesVar id="role" type="ru.drogunov.springcource.model.Role"*/-->
   <select th:object="${role}" id="role" name="role">
-    <!--/*@thymesVar id="role" type="ru.drogunov.springcource.model.Role"*/-->
-    <option th:each="role : ${T(ru.drogunov.springcource.model.Role).values()}" th:value="${role.name()}" th:text="${role}"></option>
+    <option th:each="role : ${roles}" th:value="${role}" th:text="${role}"></option>
   </select>
   <br>
   <br>

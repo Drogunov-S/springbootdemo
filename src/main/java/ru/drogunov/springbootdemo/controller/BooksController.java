@@ -2,9 +2,7 @@ package ru.drogunov.springbootdemo.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,20 +25,15 @@ public class BooksController {
         this.bookService = bookService;
         this.peopleService = peopleService;
     }
-    
     @GetMapping
-//    public String index(
-//            @RequestParam(required = false, defaultValue = "3") Integer pageSize,
-//            @RequestParam(required = false, defaultValue = "0") Integer page,
-//            @RequestParam(required = false, defaultValue = "false") Boolean sortByYear,
-//            Model model) {
     public String index(
-            @ModelAttribute("page") Page<Book> page) {
-        if (page == null) {
-            page = bookService.findAll(PageRequest.of(0, 3, Sort.by("year")));
-        } else {
-            page = bookService.findAll(PageRequest.of(page.getNumber(), page.getSize(), page.getSort()));
-        }
+            @RequestParam(required = false, defaultValue = "10") Integer pageSize,
+            @RequestParam(required = false, defaultValue = "0") Integer page,
+            @RequestParam(required = false, defaultValue = "false") Boolean sortByYear,
+            Model model) {
+        
+        
+        model.addAttribute("page", bookService.findAll(PageRequest.of(page, pageSize), sortByYear));
         return "books/books";
     }
     
@@ -68,7 +61,7 @@ public class BooksController {
             return "books/new";
         }
         bookService.save(book);
-        return "redirect: " + book.getId();
+        return "redirect:" + book.getId();
     }
     
     @GetMapping("/{id}/edit")
@@ -80,35 +73,34 @@ public class BooksController {
     }
     
     @PatchMapping("/{id}")
-    public String update(@PathVariable String id,
-                         @ModelAttribute("book") @Valid Book book,
+    public String update(@ModelAttribute("book") @Valid Book book,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "books/edit";
         }
         bookService.update(book);
-        return "redirect: books/books";
+        return "redirect:/books/books";
     }
     
     /*TODO у нас в моделе же должкн быть бук, передавать его сразу*/
-    @PostMapping("{id}/free")
+    @PostMapping("{id}/reserved")
     public String reserved(@PathVariable Integer id,
                            @ModelAttribute("person") Person person) {
         bookService.reserved(id, person);
-        return String.format("redirect: /books/%d", id);
+        return "redirect:/books/" + id;
     }
     
     @PatchMapping("{id}/free")
     public String freedomBook(@ModelAttribute("book") Book book,
                               @PathVariable("id") Integer personId) {
         bookService.freedom(personId);
-        return String.format("redirect: /books/%d", book.getId());
+        return "redirect:/books/" + book.getId();
     }
     
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Integer id) {
         bookService.delete(id);
-        return "redirect: books/books";
+        return "redirect:/books";
     }
     
     @GetMapping("/search")

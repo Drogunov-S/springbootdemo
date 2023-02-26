@@ -14,16 +14,22 @@
   <span style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
   <hr>
   <br>
-  <label for="surname">Enter surname: </label>
-  <input type="text" th:field="*{surname}" id="surname"/>
+  <label for="name">Enter login: </label>
+  <input type="text" th:field="*{login}" id="login"/>
   <hr>
-  <span style="color:red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
+  <span style="color:red" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
   <hr>
   <br>
-  <label for="age">Enter age: </label>
-  <input type="text" th:field="*{yearBrith}" id="age"/>
+  <label for="password">Enter password: </label>
+  <input type="password" th:field="*{password}" id="password"/>
   <hr>
-  <span style="color:red" th:if="${#fields.hasErrors('yearBrith')}" th:errors="*{yearBrith}"></span>
+  <span style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+  <hr>
+  <br>
+  <label for="yearOfBrith">Enter age: </label>
+  <input type="text" th:field="*{yearOfBrith}" id="yearOfBrith"/>
+  <hr>
+  <span style="color:red" th:if="${#fields.hasErrors('yearOfBrith')}" th:errors="*{yearOfBrith}"></span>
   <hr>
   <br>
   <label for="email">Enter email: </label>

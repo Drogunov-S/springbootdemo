@@ -49,9 +49,9 @@ public class PeopleService {
         peopleRepository.deleteById(id);
     }
     
-    
-    public Optional<Person> findByName(String name) {
-        return peopleRepository.findByName(name);
+    /*Todo for validators*/
+    public Optional<Person> findByLogin(String login) {
+        return peopleRepository.findByLogin(login);
     }
     
     public Optional<Person> findByEmail(String email) {

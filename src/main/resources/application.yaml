@@ -1,0 +1,21 @@
+#spring.jpa.properties.hibernate.current_session_context_class: thread
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: postgres
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/first_db
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+        hbm2ddl: validate
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+#  webflux:
+#    hiddenmethod:
+#      filter:
+#        enabled: true

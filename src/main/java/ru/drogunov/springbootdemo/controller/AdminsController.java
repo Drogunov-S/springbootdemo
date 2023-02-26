@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.drogunov.springbootdemo.model.Person;
+import ru.drogunov.springbootdemo.model.Role;
 import ru.drogunov.springbootdemo.services.PeopleService;
 
 @Controller
@@ -22,6 +23,7 @@ public class AdminsController {
     public String index(Model model,
                         @ModelAttribute("person") Person person) {
         model.addAttribute("people", peopleService.findAll());
+        model.addAttribute("roles", Role.values());
         return "admin/admin";
     }
     
@@ -29,6 +31,6 @@ public class AdminsController {
     public String add(@ModelAttribute("person") Person person,
                       @RequestParam("role") String role) {
         peopleService.update(person, role);
-        return "redirect: /admin";
+        return "redirect:/admin";
     }
 }

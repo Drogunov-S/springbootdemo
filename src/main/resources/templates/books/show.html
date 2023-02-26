@@ -28,7 +28,7 @@
 <form th:if="${!book.isFree()}" th:method="PATCH" th:action="@{/books/{id}/free(id=${book.getId()})}" th:field="book">
   <input type="submit" value="Freedom">
 </form>
-<form th:if="${book.isFree()}" th:method="POST" th:action="@{/books/{id}/free(id=${book.getId()})}" th:field="book">
+<form th:if="${book.isFree()}" th:method="POST" th:action="@{/books/{id}/reserved(id=${book.getId()})}" th:field="book">
   <label for="person">Выдать книгу: </label>
   <label for="person"></label><select th:object="${person}" th:field="*{id}" id="person">
   <!--/*@thymesVar id="person" type="ru.drogunov.springcource.model.Person"*/-->
