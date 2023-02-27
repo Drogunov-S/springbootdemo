@@ -23,13 +23,15 @@ public class Person {
     private Integer yearOfBrith;
     @Email
     private String email;
-    @Pattern(
-            regexp = "([A-Z]+|[А-Я]+)(\\w+|[а-я]+), ([A-Z]+|[А-Я]+)(\\w+|[а-я]+), \\d{6}, .+",
-            message = "Формат: \"Страна, Город, 123456, \""
-    )
+//    @Pattern(
+//            regexp = "([A-Z]+|[А-Я]+)(\\w+|[а-я]+), ([A-Z]+|[А-Я]+)(\\w+|[а-я]+), \\d{6}, .+",
+//            message = "Формат: \"Страна, Город, 123456, \""
+//    )
     private String address;
-    @Enumerated(EnumType.STRING)
-    Role role;
+//    @Enumerated(EnumType.STRING)
+//  private Role role;
+    @Column(name = "role")
+    private String role;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "person_id")
     private List<Book> books;
@@ -37,7 +39,7 @@ public class Person {
     public Person() {
     }
     
-    public Person(Integer id, String name, Integer yearBrith, String email, String address, Role role, List<Book> books) {
+    public Person(Integer id, String name, Integer yearBrith, String email, String address, String role, List<Book> books) {
         this.id = id;
         this.name = name;
         this.yearOfBrith = yearBrith;
@@ -63,11 +65,11 @@ public class Person {
         this.password = password;
     }
     
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
     
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
     

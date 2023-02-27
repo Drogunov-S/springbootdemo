@@ -34,6 +34,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import ru.drogunov.springbootdemo.model.Role;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -52,21 +56,22 @@ public class SecurityConfig {
      */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authorize ->
-                                authorize
-                                        // Выполняют одинаковые действие со строчной ниже, но есть допуск к JS и прочему
-//                                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                                        .requestMatchers("/css/**", "/images/**").permitAll()
-                                        .requestMatchers("/auth/login", "/error", "/auth/registration").permitAll()
-                                        .anyRequest().authenticated()
+        http.authorizeHttpRequests(authorize -> authorize
+                                .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                                // Выполняют одинаковые действие со строчной ниже, но есть допуск к JS и прочему
+//                              requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                                .requestMatchers("/css/**", "/images/**").permitAll()
+                                .requestMatchers("/auth/login", "/error", "/auth/registration").permitAll()
+//                                .anyRequest().hasAnyRole(Role.getRoles())
+                                .anyRequest().authenticated()
+//                                .anyRequest().hasAnyRole("ROLE_ADMIN", "ROLE_GUEST", "ROLE_USER")
                 )
-                .formLogin(form ->
-                        form
-                                .loginPage("/auth/login")
-                                .loginProcessingUrl("/process_login")
-                                .defaultSuccessUrl("/", true)
-                                .failureForwardUrl("/auth/login?error")
-                                .failureUrl("/auth/login?error")
+                .formLogin(form -> form
+                        .loginPage("/auth/login")
+                        .loginProcessingUrl("/process_login")
+                        .defaultSuccessUrl("/", true)
+                        .failureForwardUrl("/auth/login?error")
+                        .failureUrl("/auth/login?error")
                 );
         return http.build();
     }

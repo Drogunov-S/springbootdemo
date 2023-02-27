@@ -5,6 +5,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import ru.drogunov.springbootdemo.services.PersonDerailsService;
@@ -33,7 +34,7 @@ public class AuthProviderImpl implements AuthenticationProvider {
         if (!password.equals(userDetails.getPassword())) {
             throw new BadCredentialsException("Incorrect password!");
         }
-        return new UsernamePasswordAuthenticationToken(userDetails, password, Collections.emptyList());
+        return new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
     }
     
     /**

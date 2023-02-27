@@ -1,10 +1,12 @@
 package ru.drogunov.springbootdemo.security;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.drogunov.springbootdemo.model.Person;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class PersonDetails implements UserDetails {
     private final Person person;
@@ -15,7 +17,9 @@ public class PersonDetails implements UserDetails {
     
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        String role = person.getRole();
+        SimpleGrantedAuthority o = new SimpleGrantedAuthority(role);
+        return Collections.singletonList(o);
     }
     
     @Override

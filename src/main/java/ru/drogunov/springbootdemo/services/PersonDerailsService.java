@@ -22,7 +22,6 @@ public class PersonDerailsService implements UserDetailsService {
     public PersonDerailsService(PeopleRepository peopleRepository) {
         this.peopleRepository = peopleRepository;
     }
-    
     /**
      * Поиск человека в БД
      */
