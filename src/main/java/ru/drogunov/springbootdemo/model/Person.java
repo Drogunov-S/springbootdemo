@@ -1,5 +1,6 @@
 package ru.drogunov.springbootdemo.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -34,6 +35,7 @@ public class Person {
     private String role;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "person_id")
+    @JsonManagedReference
     private List<Book> books;
     
     public Person() {

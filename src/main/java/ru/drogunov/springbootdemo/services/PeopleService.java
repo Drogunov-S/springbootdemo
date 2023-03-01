@@ -3,6 +3,7 @@ package ru.drogunov.springbootdemo.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.drogunov.springbootdemo.exception.PersonNotFoundException;
 import ru.drogunov.springbootdemo.model.Person;
 import ru.drogunov.springbootdemo.model.Role;
 import ru.drogunov.springbootdemo.repositories.PeopleRepository;
@@ -25,8 +26,9 @@ public class PeopleService {
     }
     
     public Person findOne(Integer id) {
-        return peopleRepository.findById(id)
-                .orElse(null);
+        return peopleRepository.findById(id).orElseThrow(() -> {
+            throw new PersonNotFoundException("Person not found.");
+        });
     }
     
     @Transactional

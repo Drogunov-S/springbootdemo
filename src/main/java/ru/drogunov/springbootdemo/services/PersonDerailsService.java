@@ -1,3 +1,4 @@
+/*
 package ru.drogunov.springbootdemo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,11 @@ import ru.drogunov.springbootdemo.security.PersonDetails;
 
 import java.util.Optional;
 
+*/
 /**
  * Специальный сервис для SpringSecurity
- */
+ *//*
+
 @Service
 public class PersonDerailsService implements UserDetailsService {
     private final PeopleRepository peopleRepository;
@@ -22,9 +25,11 @@ public class PersonDerailsService implements UserDetailsService {
     public PersonDerailsService(PeopleRepository peopleRepository) {
         this.peopleRepository = peopleRepository;
     }
-    /**
+    */
+/**
      * Поиск человека в БД
-     */
+     *//*
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Person> person = peopleRepository.findByLogin(username);
@@ -33,3 +38,4 @@ public class PersonDerailsService implements UserDetailsService {
         }));
     }
 }
+*/
