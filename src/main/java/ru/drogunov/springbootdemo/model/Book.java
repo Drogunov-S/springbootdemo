@@ -1,5 +1,7 @@
 package ru.drogunov.springbootdemo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,6 +19,7 @@ public class Book {
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")
+    @JsonBackReference
     private Person person;
     @Size(min = 3, max = 100)
     private String title;

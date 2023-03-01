@@ -1,3 +1,4 @@
+/*
 package ru.drogunov.springbootdemo.controller;
 
 import jakarta.validation.Valid;
@@ -43,3 +44,4 @@ public class AuthController {
         return "redirect:/auth/login";
     }
 }
+*/
