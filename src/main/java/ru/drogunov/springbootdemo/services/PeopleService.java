@@ -1,8 +1,10 @@
 package ru.drogunov.springbootdemo.services;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.drogunov.springbootdemo.dto.person.PersonDTO;
 import ru.drogunov.springbootdemo.exception.PersonNotFoundException;
 import ru.drogunov.springbootdemo.model.Person;
 import ru.drogunov.springbootdemo.model.Role;
@@ -15,6 +17,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class PeopleService {
     private final PeopleRepository peopleRepository;
+    private final ModelMapper modelMapper = new ModelMapper();
     
     @Autowired
     public PeopleService(PeopleRepository peopleRepository) {
@@ -25,10 +28,11 @@ public class PeopleService {
         return peopleRepository.findAll();
     }
     
-    public Person findOne(Integer id) {
-        return peopleRepository.findById(id).orElseThrow(() -> {
+    public PersonDTO findOne(Integer id) {
+        Person person = peopleRepository.findById(id).orElseThrow(() -> {
             throw new PersonNotFoundException("Person not found.");
         });
+        return modelMapper.map(person, PersonDTO.class);
     }
     
     @Transactional

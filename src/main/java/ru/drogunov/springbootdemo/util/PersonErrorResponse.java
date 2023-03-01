@@ -4,9 +4,9 @@ public class PersonErrorResponse {
     private String massage;
     private Long timestamp;
     
-    public PersonErrorResponse(String massage, Long timestamp) {
+    public PersonErrorResponse(String massage) {
         this.massage = massage;
-        this.timestamp = timestamp;
+        this.timestamp = System.currentTimeMillis();
     }
     
     public String getMassage() {

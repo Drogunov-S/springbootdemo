@@ -20,7 +20,7 @@ public class Person {
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     private String name;
     @Column(name = "year_birth")
-    @Min(value = 1850, message = "Min year age 1850 ")
+    @Min(value = 1850, message = "Min year age 1850")
     private Integer yearOfBrith;
     @Email
     private String email;
